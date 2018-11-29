@@ -1,0 +1,36 @@
+select temp2.cust, t4.account_number, t4.balance, (0.1 * t4.balance)
+from 
+(select temp1.cust 
+from 
+(select temp.cust as cust, sum(temp.bal) as avgbal
+from 
+(select t1.cust_id as cust, t3.account_number as acc, t2.balance as bal
+from customer t1, accounts_info t2, customer_accounts_info t3
+where t1.cust_id = t3.cust_id
+and t2.account_number = t3.account_number) temp
+group by temp.cust
+order by avgbal desc) temp1
+LIMIT 2) temp2, accounts_info t4
+where t4.balance = (select max(t5.balance)
+					from accounts_info t5, customer_accounts_info t6
+					where t6.cust_id = temp2.cust
+					and t5.account_number = t6.account_number)
+
+
+select temp2.cust, t4.account_number, t4.balance
+from 
+(select temp1.cust 
+from 
+(select temp.cust as cust, sum(temp.bal) as avgbal
+from 
+(select t1.cust_id as cust, t3.account_number as acc, t2.balance as bal
+from customer t1, accounts_info t2, customer_accounts_info t3
+where t1.cust_id = t3.cust_id
+and t2.account_number = t3.account_number) temp
+group by temp.cust
+order by avgbal) temp1
+LIMIT 2) temp2, accounts_info t4
+where t4.balance = (select min(t5.balance)
+					from accounts_info t5, customer_accounts_info t6
+					where t6.cust_id = temp2.cust
+					and t5.account_number = t6.account_number)

@@ -1,0 +1,11 @@
+select t4.state_name, temp2.avgbal
+from
+(select temp.cust as cust, avg(temp.bal) as avgbal
+from 
+(select t1.cust_id as cust, t3.account_number as acc, t2.balance as bal
+from customer t1, accounts_info t2, customer_accounts_info t3
+where t1.cust_id = t3.cust_id
+and t2.account_number = t3.account_number) temp
+group by temp.cust
+order by avgbal desc) temp2, customer t4
+where t4.cust_id = temp2.cust

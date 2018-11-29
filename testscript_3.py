@@ -10,8 +10,8 @@ import argparse
 from faker import Faker
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--customers", type=int,help="enter the number of customers; default is 1000",default=1000)
-parser.add_argument("--max_accounts", type=int,help="enter the maximum number of accounts per customer; default is 10",default=10)
+parser.add_argument("--customers", type=int,help="enter the number of customers; default is 1000",default=5)
+parser.add_argument("--max_accounts", type=int,help="enter the maximum number of accounts per customer; default is 10",default=2)
 
 args = parser.parse_args()
 count = args.customers 
@@ -30,7 +30,7 @@ acc_nos_list = []
 cust_acc_list  = []
 
 for i in range(1, count+1):
-    print("user no: " + repr(i))
+    #print("user no: " + repr(i))
     cust_id = i
     first_name = fake.first_name()
     last_name = fake.last_name()
@@ -42,26 +42,26 @@ for i in range(1, count+1):
     cust_details = (cust_id,first_name,last_name,street_address,city,state,zipcode,creation_timestamp)
     cust_list.append(cust_details)	
     user_total_acc = random.randint(1, max_acc)
-    print("no of accounts for this user = " + repr(user_total_acc))
+    #print("no of accounts for this user = " + repr(user_total_acc))
     total_acc = len(acc_list)
-    print("total existing accounts = " + repr(total_acc))
+    #print("total existing accounts = " + repr(total_acc))
     if(user_total_acc <= total_acc):
-        print("user_total_acc <= total_acc")
+        #print("user_total_acc <= total_acc")
         user_new_acc = random.randint(1, user_total_acc)
-        print("no of new acc for this user = " + repr(user_new_acc))
+        #print("no of new acc for this user = " + repr(user_new_acc))
         user_existing_acc = user_total_acc - user_new_acc
-        print("no of existing acc for this user = " + repr(user_existing_acc))
+        #print("no of existing acc for this user = " + repr(user_existing_acc))
         existing_arr = random.sample(acc_nos_list, user_existing_acc)
-        print("existing_arr LIST: " + repr(existing_arr))
+        #print("existing_arr LIST: " + repr(existing_arr))
         #existing_arr = np.random.choice(acc_nos_list, user_existing_acc, replace=False)
     else:
-        print("user accounts is greater than total existing acc")
+        #print("user accounts is greater than total existing acc")
         if(total_acc == 0):
             user_new_acc = user_total_acc
             user_existing_acc = 0
         else:
             user_existing_acc = random.randint(1, total_acc)
-            print("random no of existing accounts = " + repr(user_existing_acc))
+            #print("random no of existing accounts = " + repr(user_existing_acc))
             #existing_arr = np.random.choice(acc_nos_list, user_existing_acc, replace=False)
             existing_arr = random.sample(acc_nos_list, user_existing_acc)
             user_new_acc = user_total_acc - user_existing_acc
@@ -111,6 +111,6 @@ def connect():
             conn.close()
             print('Database connection closed.')
  
- 
+
 if __name__ == '__main__':
     connect()
