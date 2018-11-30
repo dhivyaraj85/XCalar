@@ -1,0 +1,192 @@
+dhivya@dhivya-Inspiron-13-7359:~/Documents/XCalar$ clear
+
+dhivya@dhivya-Inspiron-13-7359:~/Documents/XCalar$ sudo bash stop_docker.sh 
+Error response from daemon: No such container: my_postgres
+WARNING! This will remove all stopped containers.
+Are you sure you want to continue? [y/N] y
+Total reclaimed space: 0B
+WARNING! This will remove all networks not used by at least one container.
+Are you sure you want to continue? [y/N] y
+dhivya@dhivya-Inspiron-13-7359:~/Documents/XCalar$ sudo bash setup.sh 
+Sending build context to Docker daemon   31.5MB
+Step 1/2 : FROM library/postgres
+ ---> 8d84c7940aa6
+Step 2/2 : ADD init.sql /docker-entrypoint-initdb.d/
+ ---> Using cache
+ ---> 8b0ea01c5b46
+Successfully built 8b0ea01c5b46
+Successfully tagged my_postgres:latest
+The files belonging to this database system will be owned by user "postgres".
+This user must also own the server process.
+
+The database cluster will be initialized with locale "en_US.utf8".
+The default database encoding has accordingly been set to "UTF8".
+The default text search configuration will be set to "english".
+
+Data page checksums are disabled.
+
+fixing permissions on existing directory /var/lib/postgresql/data ... ok
+creating subdirectories ... ok
+selecting default max_connections ... 100
+selecting default shared_buffers ... 128MB
+selecting dynamic shared memory implementation ... posix
+creating configuration files ... ok
+running bootstrap script ... ok
+performing post-bootstrap initialization ... ok
+syncing data to disk ... 
+WARNING: enabling "trust" authentication for local connections
+You can change this by editing pg_hba.conf or using the option -A, or
+--auth-local and --auth-host, the next time you run initdb.
+ok
+
+Success. You can now start the database server using:
+
+    pg_ctl -D /var/lib/postgresql/data -l logfile start
+
+****************************************************
+WARNING: No password has been set for the database.
+         This will allow anyone with access to the
+         Postgres port to access your database. In
+         Docker's default configuration, this is
+         effectively any other container on the same
+         system.
+
+         Use "-e POSTGRES_PASSWORD=password" to set
+         it in "docker run".
+****************************************************
+waiting for server to start....2018-11-30 20:20:55.522 UTC [44] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2018-11-30 20:20:55.546 UTC [45] LOG:  database system was shut down at 2018-11-30 20:20:54 UTC
+2018-11-30 20:20:55.561 UTC [44] LOG:  database system is ready to accept connections
+ done
+server started
+
+/usr/local/bin/docker-entrypoint.sh: ignoring /docker-entrypoint-initdb.d/*
+
+waiting for server to shut down...2018-11-30 20:20:55.600 UTC [44] LOG:  received fast shutdown request
+.2018-11-30 20:20:55.603 UTC [44] LOG:  aborting any active transactions
+2018-11-30 20:20:55.609 UTC [44] LOG:  background worker "logical replication launcher" (PID 51) exited with exit code 1
+2018-11-30 20:20:55.609 UTC [46] LOG:  shutting down
+2018-11-30 20:20:55.658 UTC [44] LOG:  database system is shut down
+ done
+server stopped
+
+PostgreSQL init process complete; ready for start up.
+
+2018-11-30 20:20:55.740 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2018-11-30 20:20:55.740 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+2018-11-30 20:20:55.749 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2018-11-30 20:20:55.790 UTC [53] LOG:  database system was shut down at 2018-11-30 20:20:55 UTC
+2018-11-30 20:20:55.801 UTC [1] LOG:  database system is ready to accept connections
+5c6a745a9edd6671a26b9744590e77f7f82cd7859a8ffbb1c31f0b12e454a766
+[
+    {
+        "Name": "my_postgres_network",
+        "Id": "5c6a745a9edd6671a26b9744590e77f7f82cd7859a8ffbb1c31f0b12e454a766",
+        "Created": "2018-11-30T12:21:02.48155612-08:00",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": {},
+            "Config": [
+                {
+                    "Subnet": "172.20.0.0/16",
+                    "IPRange": "172.20.240.0/20"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {
+            "db29969264e2c88c9c3d7651f42d576f0b13e675a1ad00c837e2ae0b0a53f563": {
+                "Name": "my_postgres",
+                "EndpointID": "94a42e2440c99394283915b6f8e26931e5b7b83e33bf6024feb1b565d72c9aac",
+                "MacAddress": "02:42:ac:14:80:02",
+                "IPv4Address": "172.20.128.2/16",
+                "IPv6Address": ""
+            }
+        },
+        "Options": {},
+        "Labels": {}
+    }
+]
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+dhivya@dhivya-Inspiron-13-7359:~/Documents/XCalar$ python test.py 
+/usr/local/lib/python2.7/dist-packages/psycopg2/__init__.py:144: UserWarning: The psycopg2 wheel package will be renamed from release 2.8; in order to keep installing from binary please use "pip install psycopg2-binary" instead. For details see: <http://initd.org/psycopg/docs/install.html#binary-install-from-pypi>.
+  """)
+Connecting to the PostgreSQL database...
+
+Query 1: States with ten highest average customer balances
+
+State Name: KS Average Balance: 98341.15
+State Name: FL Average Balance: 97811.46
+State Name: IN Average Balance: 97161.47
+State Name: VA Average Balance: 96609.34
+State Name: MS Average Balance: 95237.17
+State Name: TN Average Balance: 93952.23
+State Name: DE Average Balance: 91627.64
+State Name: NV Average Balance: 91627.64
+State Name: HI Average Balance: 90880.54
+State Name: MI Average Balance: 90372.64
+
+Query 2: Ten customers with highest total balances
+
+Customer ID: 875 Total Balance: 692733.08
+Customer ID: 384 Total Balance: 650247.13
+Customer ID: 629 Total Balance: 638361.17
+Customer ID: 665 Total Balance: 629921.65
+Customer ID: 614 Total Balance: 626805.65
+Customer ID: 794 Total Balance: 626655.86
+Customer ID: 143 Total Balance: 625610.91
+Customer ID: 324 Total Balance: 625367.20
+Customer ID: 452 Total Balance: 619904.62
+Customer ID: 657 Total Balance: 616326.75
+
+Query 3: Ten customers with lowest total balances
+
+Customer ID: 734 Total Balance: 387.80
+Customer ID: 70 Total Balance: 2320.95
+Customer ID: 565 Total Balance: 3643.55
+Customer ID: 762 Total Balance: 6184.89
+Customer ID: 537 Total Balance: 6769.42
+Customer ID: 339 Total Balance: 7390.66
+Customer ID: 139 Total Balance: 7976.45
+Customer ID: 391 Total Balance: 8439.31
+Customer ID: 302 Total Balance: 8466.40
+Customer ID: 321 Total Balance: 8591.47
+
+Query 4: Ten customers with highest total balances
+
+Customer ID: 143 Account Number JRAS2695730279029 Balance: 95828.11 New Balance: 86245.29
+Customer ID: 384 Account Number JEUC3630350415239 Balance: 90303.57 New Balance: 81273.21
+Customer ID: 614 Account Number QNGP3576100675423 Balance: 89603.20 New Balance: 80642.88
+Customer ID: 324 Account Number HZFH4860119271799 Balance: 94496.63 New Balance: 85046.96
+Customer ID: 452 Account Number NHBI0721194221936 Balance: 98131.38 New Balance: 88318.24
+Customer ID: 629 Account Number OFIM0356297733450 Balance: 99812.50 New Balance: 89831.25
+Customer ID: 657 Account Number KBSW9155536029850 Balance: 99331.49 New Balance: 89398.34
+Customer ID: 665 Account Number VUXX7889903599875 Balance: 97620.70 New Balance: 87858.63
+Customer ID: 794 Account Number YMMS8987323955443 Balance: 99032.52 New Balance: 89129.26
+Customer ID: 875 Account Number JYFO8364133668314 Balance: 96603.40 New Balance: 86943.06
+
+Query 4: Ten customers with lowest total balances
+
+Customer ID: 302 Account Number: FUPA3861795779128 Existing Balance: 8466.40 New balance: 18049.21
+Customer ID: 762 Account Number: XWGL5981057961577 Existing Balance: 6184.89 New balance: 15215.24
+Customer ID: 70 Account Number: FCCQ7548000399368 Existing Balance: 2320.95 New balance: 11281.27
+Customer ID: 537 Account Number: HQUW1157605180650 Existing Balance: 6769.42 New balance: 16219.08
+Customer ID: 139 Account Number: TLKW3425781191023 Existing Balance: 7976.45 New balance: 17789.58
+Customer ID: 321 Account Number: PBNY9609033882343 Existing Balance: 8591.47 New balance: 18572.72
+Customer ID: 339 Account Number: FCWA4279178244193 Existing Balance: 7390.66 New balance: 17323.8
+Customer ID: 391 Account Number: YOCV0700977422921 Existing Balance: 8439.31 New balance: 18201.38
+Customer ID: 565 Account Number: GIXW0985499663896 Existing Balance: 3643.55 New balance: 13546.8
+Customer ID: 734 Account Number: NAXZ4893267590530 Existing Balance: 387.80 New balance: 10048.14
+Database connection closed.
+dhivya@dhivya-Inspiron-13-7359:~/Documents/XCalar$ 
