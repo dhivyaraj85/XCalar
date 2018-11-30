@@ -71,7 +71,8 @@ for i in range(1, count+1):
         cust_acc_list.append(cust_acc_details)
     for k in range(1, user_new_acc+1):
         acc_no = fake.bban()
-        balance = random.randint(1,10000)
+        #balance = random.randint(1,10000)
+        balance = fake.pyint()
         acc_details = (acc_no,balance,creation_timestamp)
         acc_list.append(acc_details)
         cust_acc = (cust_id,acc_no)

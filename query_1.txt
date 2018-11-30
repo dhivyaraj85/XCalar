@@ -1,4 +1,4 @@
-select t4.state_name, temp2.avgbal
+select t4.state_name, trunc(temp2.avgbal,2)
 from
 (select temp.cust as cust, avg(temp.bal) as avgbal
 from 
@@ -9,3 +9,4 @@ and t2.account_number = t3.account_number) temp
 group by temp.cust
 order by avgbal desc) temp2, customer t4
 where t4.cust_id = temp2.cust
+limit 2

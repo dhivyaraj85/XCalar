@@ -1,12 +1,12 @@
 /*Query2*/
-select temp1.cust
+select temp1.cust, temp1.sumbal
 from 
-(select temp.cust as cust, sum(temp.bal) as avgbal
+(select temp.cust as cust, sum(temp.bal) as sumbal
 from 
 (select t1.cust_id as cust, t3.account_number as acc, t2.balance as bal
 from customer t1, accounts_info t2, customer_accounts_info t3
 where t1.cust_id = t3.cust_id
 and t2.account_number = t3.account_number) temp
 group by temp.cust
-order by avgbal desc) temp1
+order by sumbal desc) temp1
 LIMIT 2;
